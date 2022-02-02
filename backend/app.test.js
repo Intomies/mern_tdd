@@ -27,7 +27,7 @@ describe ('app', () => {
         expect (testApp.messages.length).to.equal(2)
     });
 
-    it ('Message has content, date and id', () => {
+    it ('Message has id, content and date', () => {
         expect (testApp.messages[0].id).to.equal(1)
         expect (testApp.messages[0].content).to.equal(testStrings.initial)
         expect (testApp.messages[0].date).not.to.equal(undefined)
@@ -36,6 +36,11 @@ describe ('app', () => {
     it ('App reads (get)',  () => {
         expect (testApp.get(1).content).to.equal(testStrings.initial)
     });
+
+    it ('App getAll returns all messages (getAll)', () => {
+        expect (testApp.getAll()).to.be.an('array')
+        expect (testApp.getAll().length).to.equal(1)
+    }); 
 
     it ('App updates (update)', () => {
         testApp.update(1, testStrings.update)
@@ -85,5 +90,25 @@ describe ('app', () => {
         testFileReadApp.delete(1)
         const testFileClearedApp = new MessageApp(testFilePaths.jsonMessagesFile)
         expect (testFileClearedApp.messages.length).to.equal(0)
+    });
+
+    it ('App rejects empty messages', () => {
+        const rejectingTestApp = new MessageApp()
+        expect (rejectingTestApp.post('')).to.deep.equal([])
+    });
+
+    it ('App doesn\'t return messages if no messages are sent', () => {
+        const emptyTestApp = new MessageApp()
+        expect (emptyTestApp.getAll()).to.deep.equal([])
+    });
+
+    it ('App rejects updates with no content', () => {
+        const falseUpdateTestApp = new MessageApp()
+        expect (falseUpdateTestApp.update(0, '')).to.deep.equal([])
+    });
+
+    it ('App delete message gives error if given message id doesn\'t exist', () => {
+        const deleteErrorTestApp = new MessageApp()
+        expect (deleteErrorTestApp.delete(0)).to.deep.equal('Message not found in database')
     });
 });
