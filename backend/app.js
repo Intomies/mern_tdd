@@ -1,3 +1,10 @@
+
+const getNewId = (arr) => {
+    return arr.length > 0 
+        ? arr[arr.length - 1].id + 1 
+        : 1
+}
+
 class MessageApp {
     constructor() {
         this.messages = []
@@ -5,7 +12,7 @@ class MessageApp {
 
     post = (content) => {
         const item = {
-            id: this.messages.length,
+            id: getNewId(this.messages),
             content: content,
             date: new Date()
         }
@@ -14,16 +21,19 @@ class MessageApp {
     }
 
     get = (id) => {
-        return this.messages[id]
+        return this.messages.filter(message => message.id === id)[0]
     }
 
     update = (id, updatedContent) => {
-        this.messages[id].content = updatedContent
-        return this.messages[id]
+        const index = this.messages.findIndex(message => message.id === id)
+        this.messages[index].content = updatedContent
+        return this.messages[index]
     }
 
     delete = (id) => {
-        return this.messages.splice(id, 1)
+        console.log('Deleting Id: ' + id)
+        this.messages = this.messages.filter(message => message.id != id)
+        return this.messages
     }
 }
 export default MessageApp;
