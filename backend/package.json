@@ -20,5 +20,5 @@
     "mocha": "^9.2.0",
     "supertest": "^6.2.2"
   },
-  "type": "module"
+  "type": "commonjs"
 }
