@@ -21,7 +21,7 @@ class MessageApp {
             )
             this.writeToJson()
             return this.messages
-        } else { return [] }
+        } else return []
         
     }
 
@@ -39,7 +39,7 @@ class MessageApp {
             this.messages[index].content = updatedContent
             this.writeToJson()
             return this.messages[index]
-        } else { return [] }
+        } else return [] 
     }
 
     delete = (id) => {
@@ -49,7 +49,7 @@ class MessageApp {
             this.messages.splice(index, 1)
             this.writeToJson()
             return this.messages
-        } else { return 'Message not found in database'}
+        } else return 'Message not found in database'
     }
 
     readFromJson = () => {
