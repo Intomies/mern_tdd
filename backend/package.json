@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha -r esm ./test/* -exit",
-    "coverage": "nyc npm run test",
+    "test": "c8 mocha -r esm ./test/* -exit",
     "start": "node -r esm app.js"
   },
   "keywords": [],

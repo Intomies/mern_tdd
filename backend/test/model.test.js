@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import MessageApp from '../lib/json/model.js'
+import MessageApp from '../lib/model.js'
 
 describe ('app', () => {
     
